@@ -1,7 +1,7 @@
 import React from 'react'
 import Add from '../img/addAvatar.png';
 
-const register = () => {
+const Register = () => {
   return (
     <div className="formContainer">
         <div className="formWrapper">
@@ -25,4 +25,4 @@ const register = () => {
   )
 }
 
-export default register
+export default Register
