@@ -7,9 +7,18 @@ const Chats = () => {
         <img src="https://images.pexels.com/photos/14455734/pexels-photo-14455734.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load" alt=""/>
         <div className="userChatInfo">
           <span> Jane </span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="userChat">
+        <img src="https://images.pexels.com/photos/14455734/pexels-photo-14455734.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load" alt=""/>
+        <div className="userChatInfo">
+          <span> Jane </span>
+          <p>Hello</p>
         </div>
       </div>
     </div>
+    
   )
 }
 
