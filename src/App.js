@@ -10,6 +10,8 @@ import { AuthContext } from "./context/AuthContext";
 function App() {
 //const currentUser = false;
   const {currentUser} = useContext(AuthContext);
+  
+  //check to see if user is logged in *** if not navigate to login page
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />;
