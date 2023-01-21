@@ -1,5 +1,6 @@
 import React from 'react'
 import Add from '../img/addAvatar.png';
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -12,7 +13,7 @@ const Login = () => {
                 <input type="password" placeholder="password"/>
                 <button> Sign in </button>
             </form>
-            <p>You do have an account? Register</p>
+            <p>You don't have an account? <Link to="/register">Register</Link></p>
         </div>
 
     </div>
