@@ -1,3 +1,4 @@
+//fetch users from DB with witch we have conversation with them
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -12,6 +13,7 @@ const Chats = () => {
 
   useEffect(() => {
     const getChats = () => {
+      //real-time fatching data
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
       });
@@ -21,6 +23,7 @@ const Chats = () => {
       };
     };
 
+    //call getChat() if we have currentUser
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 

@@ -1,3 +1,6 @@
+//chat Context used to display messages when we click on 
+//user in chats
+
 import {
   createContext,
   useContext,

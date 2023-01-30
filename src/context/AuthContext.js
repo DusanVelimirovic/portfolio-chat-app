@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  //initialy current user is empty
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
@@ -13,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
       console.log(user);
     });
 
+    //prevent memory leak
     return () => {
       unsub();
     };

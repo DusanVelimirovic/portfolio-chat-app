@@ -1,3 +1,6 @@
+//after search for user if he exist add to userChats
+//chats document collection created if we have users chating :-)
+//userChats is collection of users with witch we previosly chat with them
 import React, { useContext, useState } from "react";
 import {
   collection,
@@ -19,6 +22,7 @@ const Search = () => {
 
   const { currentUser } = useContext(AuthContext);
 
+  //search for user
   const handleSearch = async () => {
     const q = query(
       collection(db, "users"),
@@ -35,10 +39,15 @@ const Search = () => {
     }
   };
 
+  //handle searching for user and call handleSearch()
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
 
+  //create userChats and Chats collections
+  //Chats include chats between two people
+  //messages from chats add to userChats
+  //join two users id's
   const handleSelect = async () => {
     //check whether the group(chats in firestore) exists, if not create
     const combinedId =
@@ -52,7 +61,7 @@ const Search = () => {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
-        //create user chats
+        //create userChats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
@@ -82,6 +91,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Find a user"
+          //handle searching for user
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}

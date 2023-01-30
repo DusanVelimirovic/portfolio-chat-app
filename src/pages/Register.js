@@ -7,10 +7,12 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  //useState for errors
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  //handle form data
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -20,11 +22,13 @@ const Register = () => {
     const file = e.target[3].files[0];
 
     try {
-      //Create user
+      //register new  user
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      //Create a unique image name
+      //get current time
       const date = new Date().getTime();
+      
+      //upload and create unique image name
       const storageRef = ref(storage, `${displayName + date}`);
 
       await uploadBytesResumable(storageRef, file).then(() => {
@@ -36,6 +40,7 @@ const Register = () => {
               photoURL: downloadURL,
             });
             //create user on firestore
+            //"users" are collection name in firestore db
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
@@ -44,7 +49,10 @@ const Register = () => {
             });
 
             //create empty user chats on firestore
+            //when create user in the same time create empty userChats
             await setDoc(doc(db, "userChats", res.user.uid), {});
+            
+            //after register new user redirect to root page
             navigate("/");
           } catch (err) {
             console.log(err);

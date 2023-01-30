@@ -7,8 +7,12 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const { currentUser } = useContext(AuthContext);
 
+  //pass user data through components tree
+  //AuthContext costum component
+  const { currentUser } = useContext(AuthContext);
+  
+  //check if user is loged in
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />;
